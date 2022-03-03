@@ -1,48 +1,45 @@
-// SPDX-License-Identifier: MIT
-
-pragma solidity ^0.8.4;
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "hardhat/console.sol";
 
 contract DogCoin is ERC20 {
-    
-    mapping(address => uint256) private _balances;
-    
-    uint256 private _totalSupply;
+    constructor() ERC20("DogCoin", "DC") {}
+
     address[] public holders;
-    
-    
-    event User_Removed(address user);
-    event User_Added(address user);
 
-
-    constructor() ERC20("DogCoin", "DC") {
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual override {
+        _addHolder();
+        _removeHolder();
     }
 
-    uint balance = balanceOf(msg.sender);
-    function addHolder(address user) private {
-        require(user != address(0));
-        require(balance => 0);
-        holders.push(user);
-        _balances[user] = 0;
-        emit User_Added(user);
+    function _addHolder() internal {
+        for (uint256 i = 0; i < holders.length; i++) {
+            if (holders[i] == msg.sender) {
+                return;
+            }
+        }
+        holders.push(msg.sender);
     }
 
-    function removeHolder(address user) private {
-        require(user != address(0));
-        for (uint i = 0; i < holders.length; i++) {
-            if (holders[i] == user) {
+    function _removeHolder() internal {
+        if (balanceOf(msg.sender) != 0) {
+            return;
+        }
+        for (uint256 i = 0; i < holders.length; i++) {
+            if (holders[i] == msg.sender) {
+                holders[i] = holders[holders.length - 1];
                 holders.pop();
-                _balances[user] = 0;
-                emit User_Removed(user);
                 return;
             }
         }
     }
 
-    function mint(address to, uint256 amount) public {
-        _mint(to, amount);
-        
+    function mint(uint amount) public {
+        _mint(msg.sender, amount);
     }
 }
