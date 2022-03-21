@@ -3,7 +3,9 @@
     "@openzeppelin/contracts": "^4.5.0",
     "dotenv": "^16.0.0",
     "hardhat": "^2.9.1",
+    "hardhat-gas-reporter": "^1.0.8",
     "hardhat-tracer": "^1.0.0-alpha.6",
+    "require": "^2.4.20",
     "solidity-coverage": "^0.7.20"
   },
   "devDependencies": {

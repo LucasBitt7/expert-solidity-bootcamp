@@ -2,6 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
 require("hardhat-tracer");
 require("solidity-coverage")
+require("hardhat-gas-reporter");
 
 const dotenv = require('dotenv');
 dotenv.config();
