@@ -1,0 +1,22 @@
+{
+  "name": "encode-homework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^4.5.2",
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "@openzeppelin/truffle-upgrades": "^1.14.0",
+    "chai": "^4.3.6",
+    "web3": "^1.7.1",
+    "truffle": "5.5.5"
+  }
+}
